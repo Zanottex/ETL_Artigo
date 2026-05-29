@@ -33,4 +33,4 @@ def executar_script_sql(caminho_arquivo):
         if 'cur' in locals(): cur.close()
         if 'conn' in locals(): conn.close()
 
-executar_script_sql('tables.sql')
+executar_script_sql('tabela.sql')
