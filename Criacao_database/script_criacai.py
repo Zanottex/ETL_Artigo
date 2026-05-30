@@ -2,7 +2,9 @@ import os
 import psycopg2
 from dotenv import load_dotenv
 
-load_dotenv('../.env')
+script_dir = os.path.dirname(__file__)
+env_path = os.path.abspath(os.path.join(script_dir, '..', '.env'))
+load_dotenv(env_path)
 
 def executar_script_sql(caminho_arquivo):
     conn_params = {
@@ -13,6 +15,8 @@ def executar_script_sql(caminho_arquivo):
         "port": os.getenv("DB_PORT")
     }
 
+    conn = None
+    cur = None
     try:
         conn = psycopg2.connect(**conn_params)
         cur = conn.cursor()
@@ -28,9 +32,12 @@ def executar_script_sql(caminho_arquivo):
 
     except Exception as e:
         print(f"Erro: {e}")
-        if conn: conn.rollback()
+        if conn:
+            conn.rollback()
     finally:
-        if 'cur' in locals(): cur.close()
-        if 'conn' in locals(): conn.close()
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
 
-executar_script_sql('tabela.sql')
+executar_script_sql('Criacao_database/tabela.sql')
