@@ -1,20 +1,20 @@
 CREATE TABLE interrupcoes (
-    
-    IdeConjuntoUnidadeConsumidora int PRIMARY KEY ,
+    id  int primary key,
+    IdeConjuntoUnidadeConsumidora int,
     DscConjuntoUnidadeConsumidora varchar(100),
-    DscAlimentadorSubestacao varchar(5),
-    DscSubestacaoDistribuicao varchar(3),
-    NumOrdemInterrupcao int,
+    DscAlimentadorSubestacao varchar(20),
+    DscSubestacaoDistribuicao varchar(20),
+    NumOrdemInterrupcao varchar(50),
     DscTipoInterrupcao varchar(15),
     IdeMotivoInterrupcao int,
     DatInicioInterrupcao timestamp,
     DatFimInterrupcao timestamp,
     DscFatoGeradorInterrupcao varchar(255),
     NumNivelTensao int,
-    NumUnidadeConsumidora smallint,
+    NumUnidadeConsumidora int,
     NumConsumidorConjunto int,
     NumAno smallint,
     NomAgenteRegulado varchar(100),
     SigAgente varchar(50),
-    NumCPFCNPJ int
+    NumCPFCNPJ bigint
 );
