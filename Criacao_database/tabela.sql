@@ -1,5 +1,5 @@
 CREATE TABLE Interrupcoes (
-    IdeConjuntoUnidadeConsumidora VARCHAR(100),
+    IdeConjuntoUnidadeConsumidora VARCHAR(102),
     DscConjuntoUnidadeConsumidora varchar(100),
     DscAlimentadorSubestacao varchar(100),
     DscSubestacaoDistribuicao varchar(100),
@@ -13,7 +13,7 @@ CREATE TABLE Interrupcoes (
     NumUnidadeConsumidora VARCHAR(100),
     NumConsumidorConjunto VARCHAR(100),
     NumAno VARCHAR(100),
-    NomAgenteRegulado varchar(100),
+    NomAgenteRegulado varchar(255),
     SigAgente varchar(100),
-    NumCPFCNPJ varchar(14)
+    NumCPFCNPJ varchar(25)
 )
