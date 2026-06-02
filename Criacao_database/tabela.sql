@@ -4,7 +4,7 @@ CREATE TABLE Interrupcoes (
     DscAlimentadorSubestacao varchar(100),
     DscSubestacaoDistribuicao varchar(100),
     NumOrdemInterrupcao varchar(100),
-    DscTipoInterrupcao varchar(15),
+    DscTipoInterrupcao varchar(100),
     IdeMotivoInterrupcao VARCHAR(100),
     DatInicioInterrupcao varchar(100),
     DatFimInterrupcao varchar(100),
