@@ -15,7 +15,7 @@ DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASS")
 
 arquivo_csv = "dados/dados_transformados.csv"
-TABELA = "interrupcoes"
+TABELA = "interrupcoes3"
 
 
 def conectar_banco():
@@ -50,7 +50,6 @@ def limpar_tabela(conn):
 
 
 def salvar_dados_no_banco():
-    """Lê o CSV transformado e insere no PostgreSQL."""
     
     if not os.path.exists(arquivo_csv):
         print(f"✗ Erro: O arquivo '{arquivo_csv}' não foi encontrado.")
@@ -67,32 +66,25 @@ def salvar_dados_no_banco():
         return
 
     try:
-        # Limpar tabela (opcional - comentar se não quiser)
         limpar_tabela(conn)
 
         cursor = conn.cursor()
-        
-        # Preparar dados para inserção
-        # Mapear valores NaN para None (NULL no PostgreSQL)
+ 
         df = df.where(pd.notna(df), None)
-        
-        # Criar statement SQL para insert
+ 
         colunas = ", ".join(df.columns)
         placeholders = ", ".join(["%s"] * len(df.columns))
         insert_query = f"INSERT INTO {TABELA} ({colunas}) VALUES ({placeholders})"
-        
-        # Converter DataFrame para lista de tuplas
+
         dados = [tuple(row) for row in df.values]
         
         print(f"Inserindo {len(dados)} linhas na tabela '{TABELA}'...")
         
-        # Inserir dados em batch (mais eficiente)
         execute_batch(cursor, insert_query, dados, page_size=1000)
         
         conn.commit()
         print(f"✓ {len(dados)} linhas inseridas com sucesso!")
         
-        # Mostrar amostra dos dados inseridos
         cursor.execute(f"SELECT COUNT(*) FROM {TABELA};")
         total = cursor.fetchone()[0]
         print(f"✓ Total de linhas na tabela: {total}")
