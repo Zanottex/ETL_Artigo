@@ -2,7 +2,7 @@ import os
 import duckdb
 import pandas as pd
 
-arquivo_csv = "dados/base.csv"
+arquivo_csv = "dados/tipado.csv"
 arquivo_saida = "dados/dados_transformados.csv"
 
 
@@ -24,17 +24,17 @@ def transformar_dados():
         # 3. O DuckDB consegue ler o DataFrame 'df_bruto' diretamente pelo nome da variável!
         query_transformacao = """
             SELECT 
-                CAST(IdeConjuntoUnidadeConsumidora AS VARCHAR(100)) AS IdeConjuntoUnidadeConsumidora,
-                CAST(DscConjuntoUnidadeConsumidora AS VARCHAR(100)) AS DscConjuntoUnidadeConsumidora,
-                CAST(DscAlimentadorSubestacao AS VARCHAR(10)) AS DscAlimentadorSubestacao,
-                CAST(DscSubestacaoDistribuicao AS VARCHAR(5)) AS DscSubestacaoDistribuicao,
-                CAST(NumOrdemInterrupcao AS VARCHAR(15)) AS NumOrdemInterrupcao,
-                CAST(DscTipoInterrupcao AS VARCHAR(20)) AS DscTipoInterrupcao,
-                CAST(IdeMotivoInterrupcao AS VARCHAR(100)) AS IdeMotivoInterrupcao,
+                CAST(IdeConjuntoUnidadeConsumidora AS BIGINT) AS IdeConjuntoUnidadeConsumidora,
+                CAST(DscConjuntoUnidadeConsumidora AS VARCHAR(25)) AS DscConjuntoUnidadeConsumidora,
+                CAST(DscAlimentadorSubestacao AS VARCHAR(50)) AS DscAlimentadorSubestacao,
+                CAST(DscSubestacaoDistribuicao AS VARCHAR(255)) AS DscSubestacaoDistribuicao,
+                CAST(NumOrdemInterrupcao AS VARCHAR(50)) AS NumOrdemInterrupcao,
+                CAST(DscTipoInterrupcao AS VARCHAR(25)) AS DscTipoInterrupcao,
+                CAST(IdeMotivoInterrupcao AS BIGINT) AS IdeMotivoInterrupcao,
                 CAST(DatInicioInterrupcao AS TIMESTAMP) AS DatInicioInterrupcao,
                 CAST(DatFimInterrupcao AS TIMESTAMP) AS DatFimInterrupcao,
-                CAST(DscFatoGeradorInterrupcao AS VARCHAR(100)) AS DscFatoGeradorInterrupcao,
-                CAST(NumNivelTensao AS VARCHAR(100)) AS NumNivelTensao,
+                CAST(DscFatoGeradorInterrupcao AS VARCHAR(255)) AS DscFatoGeradorInterrupcao,
+                CAST(NumNivelTensao AS BIGINT) AS NumNivelTensao,
                 CAST(NumUnidadeConsumidora AS VARCHAR(100)) AS NumUnidadeConsumidora,
                 CAST(NumConsumidorConjunto AS VARCHAR(100)) AS NumConsumidorConjunto,
                 CAST(NumAno AS VARCHAR(100)) AS NumAno,

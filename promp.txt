@@ -1,0 +1,13 @@
+﻿preciso de um texto completo e detalhado de um processo que eu fiz, utilize termos técnicos para
+reescrever o que irei lhe apresentar a seguir:
+
+1° - 
+Realizado o ETL dos dados de uma base coletada da aneel sobre as quedas de energia no brasil no ano de 2025
+a base foi coletada através do portal da transparência da própria aneel, através de scripts em python utilizando de bibliotecas
+de conexão com o banco de dados como psycopg2, e para a leitura da base o DuckDB, fizemos a criação da base que inicialmente so continha o tipo de texto para podermos posteriormente sanitizarmos e limparmos a base corretamente, a transformação padronizou os dados desta base pegando cada coluna e validando quais seriam
+os tipos adequados utilizando o pandas para cada coluna da tabela, após esse processo os dados necessitaram de um pós-processamento onde analisamos 
+coluna a coluna todos os valores que incorretos e ou incompletos, assim retirando valores como Não encontrado, Não informado, etc de colunas 
+que deveriam conter datas e números, posteriormente passamos novamente pelo processo de criação da base no Postgress agora com os tipos de cada coluna
+devidamente criados, utilizando novamente o pandas e o psycopg2 para inserir as informações na base, porém devido a um problema no manuseio da base a acentuação
+das palavras ficou incorreta colocando caracteres especiais ao invés dos devidos acentos nas palavras, o que dificultou um pouco a criação dos gráficos posteriormente
+porém sem afetar os resultados obtidos
