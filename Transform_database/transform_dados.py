@@ -15,7 +15,7 @@ def transformar_dados():
 
     try:
 
-        df_bruto = pd.read_csv(arquivo_csv, sep=";", encoding="utf-8-sig", low_memory=False)
+        df_bruto = pd.read_csv(arquivo_csv, sep=",", encoding="latin-1", low_memory=False)
         con = duckdb.connect(database=":memory:")
 
         # Registrar o DataFrame como tabela no DuckDB
@@ -26,21 +26,21 @@ def transformar_dados():
             SELECT 
                 CAST(IdeConjuntoUnidadeConsumidora AS VARCHAR(100)) AS IdeConjuntoUnidadeConsumidora,
                 CAST(DscConjuntoUnidadeConsumidora AS VARCHAR(100)) AS DscConjuntoUnidadeConsumidora,
-                CAST(DscAlimentadorSubestacao AS VARCHAR(20)) AS DscAlimentadorSubestacao,
-                CAST(DscSubestacaoDistribuicao AS VARCHAR(20)) AS DscSubestacaoDistribuicao,
-                CAST(NumOrdemInterrupcao AS VARCHAR(50)) AS NumOrdemInterrupcao,
-                CAST(DscTipoInterrupcao AS VARCHAR(15)) AS DscTipoInterrupcao,
+                CAST(DscAlimentadorSubestacao AS VARCHAR(10)) AS DscAlimentadorSubestacao,
+                CAST(DscSubestacaoDistribuicao AS VARCHAR(5)) AS DscSubestacaoDistribuicao,
+                CAST(NumOrdemInterrupcao AS VARCHAR(15)) AS NumOrdemInterrupcao,
+                CAST(DscTipoInterrupcao AS VARCHAR(20)) AS DscTipoInterrupcao,
                 CAST(IdeMotivoInterrupcao AS VARCHAR(100)) AS IdeMotivoInterrupcao,
-                CAST(DatInicioInterrupcao AS VARCHAR(20)) AS DatInicioInterrupcao,
-                CAST(DatFimInterrupcao AS VARCHAR(20)) AS DatFimInterrupcao,
-                CAST(DscFatoGeradorInterrupcao AS VARCHAR(255)) AS DscFatoGeradorInterrupcao,
+                CAST(DatInicioInterrupcao AS TIMESTAMP) AS DatInicioInterrupcao,
+                CAST(DatFimInterrupcao AS TIMESTAMP) AS DatFimInterrupcao,
+                CAST(DscFatoGeradorInterrupcao AS VARCHAR(100)) AS DscFatoGeradorInterrupcao,
                 CAST(NumNivelTensao AS VARCHAR(100)) AS NumNivelTensao,
                 CAST(NumUnidadeConsumidora AS VARCHAR(100)) AS NumUnidadeConsumidora,
                 CAST(NumConsumidorConjunto AS VARCHAR(100)) AS NumConsumidorConjunto,
-                CAST(NumAno AS SMALLINT) AS NumAno,
-                CAST(NomAgenteRegulado AS VARCHAR(100)) AS NomAgenteRegulado,
-                CAST(SigAgente AS VARCHAR(10)) AS SigAgente,
-                CAST(NumCPFCNPJ AS VARCHAR(14)) AS NumCPFCNPJ
+                CAST(NumAno AS VARCHAR(100)) AS NumAno,
+                CAST(NomAgenteRegulado AS VARCHAR(150)) AS NomAgenteRegulado,
+                CAST(SigAgente AS VARCHAR(5)) AS SigAgente,
+                CAST(NumCPFCNPJ AS VARCHAR(100)) AS NumCPFCNPJ
             FROM df_bruto
         """
 

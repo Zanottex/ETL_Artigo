@@ -15,7 +15,7 @@ DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASS")
 
 arquivo_csv = "dados/dados_transformados.csv"
-TABELA = "interrupcoes"
+TABELA = "interrupcoes2"
 
 
 def conectar_banco():

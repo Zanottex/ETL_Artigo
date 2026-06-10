@@ -1,4 +1,3 @@
-# coding: cp1252
 import os
 import psycopg2
 from dotenv import load_dotenv
@@ -7,7 +6,7 @@ script_dir = os.path.dirname(__file__)
 env_path = os.path.abspath(os.path.join(script_dir, '..', '.env'))
 sql_path = os.path.abspath(os.path.join(script_dir, 'tabela.sql'))
 
-load_dotenv(env_path, encoding='utf-8-sig')
+load_dotenv(env_path, encoding='latin-1')
 
 
 def executar_script_sql(caminho_arquivo):
@@ -28,7 +27,7 @@ def executar_script_sql(caminho_arquivo):
 
         print(f"Executando {caminho_arquivo}...")
 
-        encodings = ['utf-8-sig', 'cp1252', 'latin-1', 'utf-8']
+        encodings = ['latin-1', 'cp1252', 'utf-8-sig', 'utf-8']
         sql_script = None
 
         for encoding in encodings:
@@ -56,6 +55,5 @@ def executar_script_sql(caminho_arquivo):
             cur.close()
         if conn:
             conn.close()
-
 
 executar_script_sql(sql_path)
