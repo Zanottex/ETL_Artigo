@@ -18,10 +18,8 @@ def transformar_dados():
         df_bruto = pd.read_csv(arquivo_csv, sep=",", encoding="latin-1", low_memory=False)
         con = duckdb.connect(database=":memory:")
 
-        # Registrar o DataFrame como tabela no DuckDB
         con.register("df_bruto", df_bruto)
 
-        # 3. O DuckDB consegue ler o DataFrame 'df_bruto' diretamente pelo nome da variável!
         query_transformacao = """
             SELECT 
                 CAST(IdeConjuntoUnidadeConsumidora AS BIGINT) AS IdeConjuntoUnidadeConsumidora,

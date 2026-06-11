@@ -4,10 +4,8 @@ import psycopg2
 from psycopg2.extras import execute_batch
 from dotenv import load_dotenv
 
-# Carregar variáveis de ambiente do .env
 load_dotenv()
 
-# Configuração do banco de dados
 DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT")
 DB_NAME = os.getenv("DB_NAME")
@@ -15,15 +13,11 @@ DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASS")
 
 arquivo_csv = "dados/dados_transformados.csv"
-<<<<<<< HEAD
-TABELA = "interrupcoes2"
-=======
+
 TABELA = "interrupcoes3"
->>>>>>> b77dcb8c27c3f1a13d3471403b66584a5be76fff
 
 
 def conectar_banco():
-    """Conecta ao banco de dados PostgreSQL."""
     try:
         conn = psycopg2.connect(
             host=DB_HOST,
@@ -40,7 +34,6 @@ def conectar_banco():
 
 
 def limpar_tabela(conn):
-    """Limpa a tabela antes de inserir novos dados."""
     try:
         cursor = conn.cursor()
         cursor.execute(f"DELETE FROM {TABELA};")
@@ -104,7 +97,4 @@ def salvar_dados_no_banco():
 
 
 if __name__ == "__main__":
-    print("=" * 60)
-    print("ETL - SALVAR DADOS NO POSTGRESQL")
-    print("=" * 60)
     salvar_dados_no_banco()

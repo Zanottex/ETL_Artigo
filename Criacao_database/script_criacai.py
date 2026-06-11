@@ -17,7 +17,7 @@ def executar_script_sql(caminho_arquivo):
     "database": os.getenv("DB_NAME"),
     "user": os.getenv("DB_USER"),
     "password": os.getenv("DB_PASS"),
-    "port": os.getenv("DB_PORT") # força UTF-8 na conexão
+    "port": os.getenv("DB_PORT") 
     }
     conn = None
     cur = None
